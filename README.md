@@ -52,7 +52,9 @@ _An implementation of a functional Taxi/Cab ordering Backend System in Go_
 
     <code>
     Content-Type application/vnd.api+json
+
     Accept application/vnd.api+json
+
     Authorization Bearer xxxxxxx
     </code>
 
