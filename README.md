@@ -9,7 +9,7 @@ _An implementation of a functional Taxi/Cab ordering Backend System in Go_
 - It's also recommended to have Mongodb running
 - Redis can be used to send invoices in emails.
 
-  **Technologies Used:**
+**Technologies Used:**
 
 - JSON API
 - Rest
