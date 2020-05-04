@@ -50,12 +50,8 @@ _An implementation of a functional Taxi/Cab ordering Backend System in Go_
 
 7.  Make sure that if you create HTTP request to include in header the below:
 
-    <code>
-    Content-Type application/vnd.api+json
-
-    Accept application/vnd.api+json
-
-    Authorization Bearer xxxxxxx
-    </code>
+    > Content-Type application/vnd.api+json
+    > Accept application/vnd.api+json
+    > Authorization Bearer xxxxxxx
 
 > Feel free to PR and Review
