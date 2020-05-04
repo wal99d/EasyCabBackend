@@ -28,33 +28,8 @@ _An implementation of a functional Taxi/Cab ordering Backend System in Go_
 
     > go build servers/profile/main.go profile
 
-2.  Host each server on same subnet for better performance
-3.  Use a reverse proxy to manage the traffics, below is example for using NGINX:
-
-    <code>
-    user nobody;
-    worker*processes 4;
-    events {
-    worker_connections 1024;
-    }
-    http {
-    include mime.types;
-    default_type application/octet-stream;
-    sendfile on;
-    keepalive_timeout 65;
-    server {
-    listen 30001;
-    server_name localhost;
-    location / {
-    root /Library/WebServer/Documents;
-    autoindex on;
-    }
-    location ~* \.(eot|ttf|woff)\$ {
-    add*header Access-Control-Allow-Origin *;
-    }
-    }
-    </code>
-
+2.  Host each server on same subnet for better performance.
+3.  Use a reverse proxy to manage the traffics,for example NGINX.
 4.  Start a new Mongodb Server/Deamon:
 
     <code>
