@@ -11,9 +11,10 @@ _An implementation of a functional Taxi/Cab ordering Backend System in Go_
 
 **Technologies Used:**
 
-- JSON API
-- Rest
+- Rest JSON API
+- GeoJSON
 - JWT
 - Mongodb
+- GeoJSON
 
 > Feel free to PR and Review

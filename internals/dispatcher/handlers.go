@@ -137,7 +137,6 @@ func (c *appContext) GetDriverListHandler(w http.ResponseWriter, r *http.Request
 	found, currentUser := repo.FindUser(body.Data.Properties.Mobile)
 	if !found {
 		//create new document for the user
-		//body.Data.Id = bson.NewObjectId()
 		err := repo.Create(&body.Data)
 		if err != nil {
 			common.WriteError(w, common.ErrInternalServer)
@@ -145,8 +144,6 @@ func (c *appContext) GetDriverListHandler(w http.ResponseWriter, r *http.Request
 		}
 
 		//update his locations coordinates
-		//err=repo.UpdateCoords(body.Data.Mobile , body.Data.Location.Coordinates)
-
 		//then find nearby drivers to him/her
 		drivers, err := repo.ShowNearbyDrivers(body.Data.Properties.Country, body.Data.Geometry.Coordinates, body.Data.Properties.CarType)
 		if err != nil {
@@ -291,7 +288,6 @@ func (c *appContext) StartJourneyHandler(w http.ResponseWriter, r *http.Request)
 	repo := dispatchSvc.DispatchRepo{c.db.C("requests")}
 	var result string
 
-	//_ , driver :=repo.FindUser(body.Data.Mobile)
 	t := time.Now()
 	startTime := t.Format(time.RFC3339)
 	log.Println(startTime)
@@ -320,7 +316,6 @@ func (c *appContext) StopJourneyHandler(w http.ResponseWriter, r *http.Request) 
 
 	var result string
 
-	//_ , driver :=repo.FindUser(body.Data.Mobile)
 	t := time.Now()
 	finishTime := t.Format(time.RFC3339)
 	err := repo.UpdateFinishJourneyAndBilled(body.Data.Mobile, finishTime)
@@ -379,7 +374,6 @@ func (c *appContext) StopJourneyHandler(w http.ResponseWriter, r *http.Request) 
 	oTime, _ := strconv.ParseFloat(elaspsedTime, 64)
 	offeredTime := billingSvc.RoundUp(oTime, 2)
 	bill.Minprice = measureMinValue
-	//mintuesPrice := measureValue * (offeredTime - 5) here we subtract 5 mintues as per easycab request
 	mintuesPrice := measureValue * (offeredTime)
 
 	switch {
@@ -458,7 +452,6 @@ func (c *appContext) StopJourneyHandler(w http.ResponseWriter, r *http.Request) 
 
 //this function will be consumed by the owner to show him list of connected clients
 func (c *appContext) GetConnectedClients(w http.ResponseWriter, r *http.Request) {
-	//body:= context.Get(r, "body").(*dispatchSvc.DispatchResource)
 	repo := dispatchSvc.DispatchRepo{c.db.C("requests")}
 	_, count, err := repo.FindAllClientsOnline()
 	if err != nil {

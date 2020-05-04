@@ -23,9 +23,7 @@ func (r *Repo) CreatePrices(prices *PricesRequest) error {
 	if err != nil {
 		return err
 	}
-
 	prices.Id = id
-
 	return nil
 }
 
@@ -35,9 +33,7 @@ func (r *Repo) Create(billRequest *BillRequest) error {
 	if err != nil {
 		return err
 	}
-
 	billRequest.Id = id
-
 	return nil
 }
 
@@ -47,7 +43,6 @@ func (r *Repo) UpdateEmailedBill(id string) error {
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 
@@ -75,18 +70,15 @@ func (r *Repo) UpdatePrices(cartype string, measure string, value float64, minpr
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 
 func (r *Repo) FindPrices(cartype string, measure string) PriceResource {
 	result := PriceResource{}
-	//r.Coll.Find(bson.M{"cartype":cartype,"measure": measure}).One(&result.Data)
 	err := r.Coll.Find(bson.M{"cartype": cartype, "measure": measure}).One(&result.Data)
 	if err != nil {
 		log.Println(err)
 	}
-	//log.Println(result)
 	return result
 }
 
@@ -97,7 +89,6 @@ func (r *Repo) FindDiscountPrice(coupon string) DiscountRequest {
 }
 
 type RevenueReport struct {
-	//Id string `json:"id" bson:"_id,omitempty"` //You need to keep bson:_id otherwise you wouldn't get any result for driverid
 	DriverId string  `json:"driverid"`
 	Mobile   string  `json:"mobile"`
 	Cartype  string  `json:"cartype"`
@@ -105,7 +96,6 @@ type RevenueReport struct {
 }
 
 type RevenuesReport struct {
-	//Id string `json:"id" bson:"_id,omitempty"` //You need to keep bson:_id otherwise you wouldn't get any result for driverid
 	DriverId string  `json:"driverid"`
 	Mobile   string  `json:"mobile"`
 	Cartype  string  `json:"cartype"`
@@ -126,7 +116,6 @@ func (r *Repo) ShowRevenueReportPerDriver(driverId string, startDate time.Time, 
 			},
 		},
 	}
-
 	o2 := bson.M{
 		"$group": bson.M{
 			"_id": bson.M{
@@ -139,7 +128,6 @@ func (r *Repo) ShowRevenueReportPerDriver(driverId string, startDate time.Time, 
 			},
 		},
 	}
-
 	o3 := bson.M{
 		"$project": bson.M{
 			"driverid": "$_id.driverid",
@@ -148,17 +136,12 @@ func (r *Repo) ShowRevenueReportPerDriver(driverId string, startDate time.Time, 
 			"revenue":  "$revenue",
 		},
 	}
-
 	operations := []bson.M{o1, o2, o3}
-	// Prepare the query to run in the MongoDB aggregation pipeline
 	pipe := r.Coll.Pipe(operations)
-	// Run the queries and capture the results
-	//results:=[]bson.M{}
 	results := RevenueReport{}
 	err := pipe.One(&results)
 	log.Println(results)
 	results.Revenue = RoundUp(results.Revenue, 2)
-
 	return results, err
 }
 
@@ -171,7 +154,6 @@ func (r *Repo) ShowAllRevenueReport(startDate time.Time, endDate time.Time) (Rev
 			},
 		},
 	}
-
 	o2 := bson.M{
 		"$group": bson.M{
 			"_id": bson.M{
@@ -184,7 +166,6 @@ func (r *Repo) ShowAllRevenueReport(startDate time.Time, endDate time.Time) (Rev
 			},
 		},
 	}
-
 	o3 := bson.M{
 		"$project": bson.M{
 			"driverid": "$_id.driverid",
@@ -193,9 +174,7 @@ func (r *Repo) ShowAllRevenueReport(startDate time.Time, endDate time.Time) (Rev
 			"revenue":  "$revenue",
 		},
 	}
-
 	operations := []bson.M{o1, o2, o3}
-	// Prepare the query to run in the MongoDB aggregation pipeline
 	pipe := r.Coll.Pipe(operations)
 	// Run the queries and capture the results
 	allResults := RevenueReports{}
