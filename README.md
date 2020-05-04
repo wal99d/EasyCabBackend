@@ -15,6 +15,5 @@ _An implementation of a functional Taxi/Cab ordering Backend System in Go_
 - GeoJSON
 - JWT
 - Mongodb
-- GeoJSON
 
 > Feel free to PR and Review
