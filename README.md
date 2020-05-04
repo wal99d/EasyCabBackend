@@ -30,6 +30,7 @@ _An implementation of a functional Taxi/Cab ordering Backend System in Go_
 
 2.  Host each server on same subnet for better performance
 3.  Use a reverse proxy to manage the traffics, below is example for using NGINX:
+
     <code>
     user nobody;
     worker*processes 4;
@@ -55,18 +56,25 @@ _An implementation of a functional Taxi/Cab ordering Backend System in Go_
     </code>
 
 4.  Start a new Mongodb Server/Deamon:
+
     <code>
     ~/mongodb/bin/mongod --dbpath /data/db
     </code>
-5.  Insert Demo JSON file to Mongo DB Collection
+
+5.  Insert Demo JSON file to Mongo DB Collection:
+
     <code>
     ~/mongodb/bin/mongoimport --db DB_NAME --collection COLLECTION_NAME --drop --file= /LOCATION/OF/YOUR/JSON/DB/FILE.json
     </code>
+
 6.  Create 2D Index such as:
+
     <code>
     db.COLLECTION_NAME.ensureIndex({NAME_OF_LOCATION_FIELD:"2dsphere"})
     </code>
+
 7.  Make sure that if you create HTTP request to include in header the below:
+
     <code>
     Content-Type application/vnd.api+json
     Accept application/vnd.api+json
